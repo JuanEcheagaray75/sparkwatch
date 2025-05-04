@@ -11,13 +11,13 @@ wheels/
 
 # UV
 .venv
-.python-version
-uv.lock
 .coverage
 
 # Test Results
 htmlcov
 .pytest_cache
+.hypothesis
+.tox
 
 # Ruff
 .ruff_cache
