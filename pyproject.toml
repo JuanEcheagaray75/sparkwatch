@@ -1,9 +1,7 @@
 [project]
 name = "sparkwatch"
 version = "0.1.0"
-authors = [
-  { name="Juan Echeagaray", email="pabloechg@outlook.com" },
-]
+authors = [{ name = "Juan Echeagaray", email = "pabloechg@outlook.com" }]
 description = "Spark Based ML Utilities"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -11,17 +9,23 @@ dependencies = [
     "matplotlib>=3.10.1",
     "pandas>=2.2.3",
     "pyspark>=3.5.5",
-    "xgboost>=3.0.0",
 ]
 
 [dependency-groups]
+test = [
+    "hypothesis>=6.131.9",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+]
 dev = [
     "build>=1.2.2.post1",
     "hatchling>=1.27.0",
     "pre-commit>=4.2.0",
-    "pytest>=8.3.5",
-    "pytest-cov>=6.1.1",
     "ruff>=0.11.5",
+    "tox>=4.25.0",
+]
+interactive = [
+    "ipykernel>=6.29.5",
 ]
 
 [build-system]
@@ -32,7 +36,27 @@ build-backend = "hatchling.build"
 packages = ["sparkwatch"]
 
 [tool.pytest.ini_options]
-addopts = "--cov=sparkwatch"
-testpaths = [
-    "sparkwatch/tests"
+addopts = "--cov=sparkwatch --cov-report=term-missing"
+testpaths = ["sparkwatch/tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["my_project"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+
+[tool.tox]
+envlist = ["py311"]
+isolated_build = true
+
+[tool.tox.env.py311]
+dependency_groups = ["test"]
+commands = [
+    ["pytest"]
 ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
