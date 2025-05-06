@@ -1,9 +1,7 @@
 name: CI Tests
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  workflow_dispatch:
+
 
 env:
   UV_SYSTEM_PYTHON: 1
