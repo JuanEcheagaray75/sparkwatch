@@ -2,11 +2,7 @@ import numpy as np
 import pyspark.sql.functions as F
 from pyspark.sql import DataFrame
 
-
-class InsufficientDataError(Exception):
-    def __init__(self, n: int, required: int = 3):
-        message = f"Only {n} samples provided, but at least {required} are required."
-        super().__init__(message)
+from sparkwatch.exceptions import InsufficientDataError
 
 
 def _data_range(data: DataFrame, col: str) -> tuple[float, float]:
